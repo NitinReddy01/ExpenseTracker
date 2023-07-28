@@ -21,7 +21,7 @@ export default function Login(props) {
             pword: pword
         }
         try {
-            const res = await axios.post('/login', user);
+            const res = await axios.post('/auth/login', user);
             // console.log(res.data);
             setUname('');
             setPword('');

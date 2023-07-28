@@ -36,7 +36,7 @@ export default function Register(props) {
                 pword: pword
             }
             try{
-                const res=await axios.post('/register',user);
+                const res=await axios.post('/auth/register',user);
                 console.log(res);
                 navigate('/login',{replace:true});
             }

@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 const useRefreshToken= ()=>{
     const { setUser } = useAuth();
     const refresh = async ()=>{
-        const res=await axios.get('/refreshToken');
+        const res=await axios.get('/auth/refreshToken');
         setUser((prevState)=>{
             // console.log(prevState.accessToken);
             // console.log(res.data.accessToken);
