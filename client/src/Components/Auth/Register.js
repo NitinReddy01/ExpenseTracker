@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from '../Api/axios';
+import axios from '../../Api/axios';
 import { Link,useNavigate } from "react-router-dom";
+import './style.css';
 
 export default function Register(props) {
     const [uname, setUname] = useState("");
@@ -61,7 +62,7 @@ export default function Register(props) {
                 style={{
                     display: error ? '' : 'none',
                 }}>
-                <h2>{errInfo}</h2>
+                <h2 className="error">{errInfo}</h2>
             </div>
         );
     };

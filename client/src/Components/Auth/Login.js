@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "../Api/axios";
+import axios from "../../Api/axios";
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import useAuth from "../Hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
+import './style.css';
 
 export default function Login(props) {
     const [uname, setUname] = useState("");
@@ -27,7 +28,7 @@ export default function Login(props) {
             setPword('');
             setError(false);
             setErrorInfo('');
-            setUser({...user,accessToken:res.data.accessToken});
+            setUser({id:res.data.id,...user,accessToken:res.data.accessToken});
             navigate(from,{replace:true});
         }
         catch (err) {
@@ -54,7 +55,7 @@ export default function Login(props) {
                 style={{
                     display: error ? '' : 'none',
                 }}>
-                <h2>{errorInfo}</h2>
+                <h2 className="error">{errorInfo}</h2>
             </div>
         );
     };
