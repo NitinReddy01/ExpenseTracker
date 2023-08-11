@@ -61,7 +61,7 @@ const userRegister= async (req,res)=>{
 
 const userLogout= async (req,res)=>{
     const token=req.cookies?.jwt;
-    console.log(token);
+    // console.log(token);
     if(!token) return res.sendStatus(204);
     const user=await User.findOne({refreshToken:token});
     // console.log(user);
@@ -81,6 +81,7 @@ const handleRefreshToken=async (req,res)=>{
     if(!token) return res.sendStatus(401);
 
     const user=await User.findOne({refreshToken:token});
+    // console.log(user);
     if(!user) return res.sendStatus(403);
 
     jwt.verify(token,process.env.REFRESH_TOKEN_SECRET,(err,decoded)=>{

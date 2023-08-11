@@ -2,7 +2,7 @@ const Income = require("../model/Income");
 const Expense=require('../model/Expense');
 
 const addIncome=async (req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     const {id,data}=req.body;
     if(!id || !data) return res.status(400).send({"message":"missing data"});
     const {title,amount,category,description,date}=data;

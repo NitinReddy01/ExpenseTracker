@@ -4,6 +4,7 @@ import Login from './Components/Auth/Login';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Components/Home/Home';
 import RequireAuth from './Components/Auth/RequireAuth';
+import ErrorPage from './Components/ErrorPage';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
       <Route element={<RequireAuth/>}>
-          <Route path='/' element={<Home/>} />
+          <Route path='/*' element={<Home/>} />
+          <Route path='/error' element={<ErrorPage/>} />
       </Route>
     </Routes>
     </>

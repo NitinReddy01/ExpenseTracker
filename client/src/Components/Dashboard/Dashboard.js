@@ -14,7 +14,7 @@ export default function Dashboard() {
   useEffect(() => {
     getExpenses();
     getIncomes();
-  }, [])
+  },[])
 
   return (
     <div className='dashboard'>
