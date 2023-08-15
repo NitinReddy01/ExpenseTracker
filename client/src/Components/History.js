@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import useTransactions from '../../Hooks/useTransactions';
-import './history.css';
+import React from 'react'
+import useTransactions from '../Hooks/useTransactions';
+import {styled} from 'styled-components';
 
 export default function History() {
   const { transactionHistory } = useTransactions();
   const history = transactionHistory();
 
   return (
-    <div className='history'>
+    <HistoryStyle>
       <h2>Recent History</h2>
       {history.map((item) => {
         const { _id, title, amount, type } = item;
@@ -28,6 +28,22 @@ export default function History() {
           </div>
         );
       })}
-    </div>
+    </HistoryStyle>
   )
 }
+
+const HistoryStyle=styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .history-item{
+    background: #FCF6F9;
+    border: 2px solid #FFF;
+    box-shadow: 0px 1px 15px rgba(0,0,0,0.06);
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`
