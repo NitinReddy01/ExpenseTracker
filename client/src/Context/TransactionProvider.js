@@ -31,14 +31,13 @@ export const TransactionProvider=(props) =>{
         }
     }
 
-    const deleteIncome = async ()=>{
+    const deleteIncome = async (id)=>{
         try{
-            await axiosPrivate.delete(`/transaction/delete_income/${user?.id}`);
-            getExpenses();
+            await axiosPrivate.delete(`/transaction/delete_income/${id}`);
+            getIncomes();
         }catch (err){
             setErr(err.response.data.message);
         }
-        
     }
 
     const totalIncome =()=>{
@@ -70,9 +69,9 @@ export const TransactionProvider=(props) =>{
         }
     }
 
-    const deleteExpense = async ()=>{
+    const deleteExpense = async (id)=>{
         try{
-            await axiosPrivate.delete(`/transaction/delete_expense/${user?.id}`);
+            await axiosPrivate.delete(`/transaction/delete_expense/${id}`);
             getExpenses();
         }catch (err){
             setErr(err.response.data.message);
@@ -103,7 +102,7 @@ export const TransactionProvider=(props) =>{
     return (
         <TransactionContext.Provider value={
             {addIncome,getIncomes,deleteIncome,totalIncome,addExpense,getExpenses,deleteExpense,totalExpenses,
-            totalBalance,transactionHistory,incomes,expenses}
+            totalBalance,transactionHistory,incomes,expenses,err,setErr}
             }>
             {props.children}
         </TransactionContext.Provider>
