@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import useTransactions from '../Hooks/useTransactions';
 import { InnerLayout } from '../Styles/Layout';
-import ExpenseFrom from './Forms/ExpenseFrom';
 import TransactionItem from './TransactionItem';
 import { styled } from 'styled-components';
+import Form from './Form';
 
 export default function Expenses() {
-  const {expenses,totalExpenses,deleteExpense,getExpenses}=useTransactions();
+  const {expenses,totalExpenses,deleteExpense,getExpenses,addExpense}=useTransactions();
+  const categories=["education","food","health","subscriptions","takeaways","clothing","travelling","other"];
   useEffect(()=>{
     getExpenses();
   },[])  
@@ -17,11 +18,11 @@ export default function Expenses() {
         <h2 className='total'>Total Expenses: <span>${totalExpenses()}</span></h2>
         <div className='content'>
           <div className='form'>
-            <ExpenseFrom/>
+            <Form submitFunction={addExpense} categories={categories} />
           </div>
           <div className='incomes'>
             {expenses.map((expense)=>{
-              console.log(expense);
+              // console.log(expense);
               const {_id,title,amount,date,category,description,type} = expense;
               return <TransactionItem
                        key={_id}

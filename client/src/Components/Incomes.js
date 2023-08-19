@@ -3,10 +3,11 @@ import { styled } from 'styled-components'
 import useTransactions from '../Hooks/useTransactions';
 import {InnerLayout} from '../Styles/Layout';
 import TransactionItem from './TransactionItem';
-import IncomeForm from './Forms/IncomeForm';
+import IncomeForm from './Form';
 
 export default function Incomes() {
-  const {incomes,totalIncome,deleteIncome,getIncomes}=useTransactions();
+  const {incomes,totalIncome,deleteIncome,getIncomes,addIncome}=useTransactions();
+  const categories=["salary","investment","freelancing","bitcoin","bank transfer","youtube","other"];
   useEffect(()=>{
     getIncomes();
   },[])
@@ -17,11 +18,11 @@ export default function Incomes() {
         <h2 className='total'>Total Income: <span>${totalIncome()}</span></h2>
         <div className='content'>
           <div className='form'>
-            <IncomeForm/>
+            <IncomeForm submitFunction={addIncome} categories={categories} />
           </div>
           <div className='incomes'>
             {incomes.map((income)=>{
-              console.log(income);
+              // console.log(income);
               const {_id,title,amount,date,category,description,type} = income;
               return <TransactionItem
                        key={_id}

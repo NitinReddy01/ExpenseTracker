@@ -13,7 +13,7 @@ export const TransactionProvider=(props) =>{
 
     const addIncome = async (income)=>{
         try{
-            await axiosPrivate.post('/transaction/add_income',{id:user?.id,data:income.data});
+            await axiosPrivate.post('/transaction/add_income',{id:user?.id,data:income});
             getIncomes();
         }
         catch (err){
@@ -50,7 +50,7 @@ export const TransactionProvider=(props) =>{
 
     const addExpense = async (expense)=>{
         try{
-            await axiosPrivate.post('/transaction/add_expense',{id:user?.id,data:expense.data});
+            await axiosPrivate.post('/transaction/add_expense',{id:user?.id,data:expense});
             getExpenses();
         }
         catch (err){
