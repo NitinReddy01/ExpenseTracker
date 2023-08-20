@@ -7,6 +7,7 @@ export default function Register(props) {
     const [uname, setUname] = useState("");
     const [pword, setPword] = useState("");
     const [confirmPword, setConfirmPword] = useState("");
+    const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState(false);
     const [errInfo, setErrInfo] = useState("");
     const navigate=useNavigate();
@@ -20,6 +21,38 @@ export default function Register(props) {
     const cpwordChange = (event) => {
         setConfirmPword(event.target.value);
     }
+    const validatePass = (pass)=>{
+        if(pass.length<8){
+            setError(true);
+            setErrInfo("Password must contain atleast 8 characters");
+            return false;
+        }
+        const hasUpper=/[A-Z]/;
+        const hasLower=/[a-z]/;
+        const hasDigit=/\d/;
+        const hasSpecial=/[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/;
+        if(!hasUpper.test(pass)){
+            setError(true);
+            setErrInfo("Password must contain atleast 1 uppercase");
+            return false;
+        }
+        else if(!hasLower.test(pass)){
+            setError(true);
+            setErrInfo("Password must contain atleast 1 lowercase");
+            return false; 
+        }
+        else if(!hasDigit.test(pass)){
+            setError(true);
+            setErrInfo("Password must contain atleast 1 digit");
+            return false; 
+        }
+        else if(!hasSpecial.test(pass)){
+            setError(true);
+            setErrInfo("Password must contain atleast 1 special character");
+            return false; 
+        }
+        return true;
+    }
     const register = async (event) => {
         event.preventDefault();
         if (uname === '' || pword === '' || confirmPword === '') {
@@ -31,6 +64,7 @@ export default function Register(props) {
             setErrInfo("Passwords do not match");
         }
         else {
+            if(!validatePass(pword)) return ;
             setError(false);
             let user = {
                 uname: uname,
@@ -80,10 +114,20 @@ export default function Register(props) {
                         <input className="uname" value={uname} onChange={unameChange} type="text" placeholder="username" required />
                     </div>
                     <div className="password">
-                        <input className="pword" value={pword} onChange={pwrodChange} type="password" placeholder="password" required />
+                        <div className="pass-con">
+                            <input className="pword" value={pword} onChange={pwrodChange} type={showPass?'text':'password'} placeholder="password" required />
+                            <i className={showPass?"fa fa-eye-slash":"fa fa-eye"} aria-hidden="true" 
+                            onClick={()=>{setShowPass(!showPass)}} ></i>
+                        </div>
+                        <br/>
+                        <span>*must contain one upper,lower,digit,speacial character</span>
                     </div>
                     <div className="password">
-                        <input className="pword" value={confirmPword} onChange={cpwordChange} type="password" placeholder="confirm password" required />
+                        <div className="pass-con">
+                            <input className="pword" value={confirmPword} onChange={cpwordChange} type={showPass?'text':'password'} placeholder="confirm password" required />
+                            <i className={showPass?"fa fa-eye-slash":"fa fa-eye"} aria-hidden="true"
+                            onClick={()=>{setShowPass(!showPass)}} ></i>
+                        </div>
                     </div>
                     <div className="or1">
                         already a member?<Link className="orsign" to="/login" > signin </Link><br></br>

@@ -8,7 +8,7 @@ const useRefreshToken= ()=>{
         setUser((prevState)=>{
             // console.log(prevState.accessToken);
             // console.log(res.data.accessToken);
-            return {...prevState,accessToken:res.data.accessToken};
+            return {id:res.data.id,uname:res.data.username,accessToken:res.data.accessToken};
         });
         return res.data.accessToken;
     }

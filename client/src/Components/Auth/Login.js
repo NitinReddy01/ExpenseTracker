@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../Api/axios";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import useAuth from "../../Hooks/useAuth";
@@ -7,12 +7,13 @@ import './style.css';
 export default function Login(props) {
     const [uname, setUname] = useState("");
     const [pword, setPword] = useState("");
+    const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState(false);
     const [errorInfo, setErrorInfo] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-    const {setUser}=useAuth();
+    const {setUser,persist,setPersist}=useAuth();
 
     const login = async (event) => {
         event.preventDefault();
@@ -59,6 +60,11 @@ export default function Login(props) {
             </div>
         );
     };
+
+    useEffect(()=>{
+        localStorage.setItem("persist",persist);
+    },[persist]);
+
     return (
         <>
             <form >
@@ -73,13 +79,20 @@ export default function Login(props) {
                         <input className="uname" type="text" placeholder="Username" value={uname} required onChange={(e) => setUname(e.target.value)} />
                     </div>
                     <div className="password">
-                        <input className="pword" type="password" placeholder="Password" value={pword} required onChange={(e) => { setPword(e.target.value) }} />
+                        <div className="pass-con" >
+                            <input className="pword" type={showPass?"text":"password"} placeholder="Password" value={pword} required onChange={(e) => { setPword(e.target.value) }} />
+                            <i className={showPass?"fa fa-eye-slash":"fa fa-eye"} aria-hidden="true" 
+                            onClick={()=>{setShowPass(!showPass)}} ></i>
+                         </div>
                     </div>
                     <div className="or1">
                         not a member?<Link className="orsign" to="/register" > signup now </Link><br></br>
                     </div>
                     <div className="loginbtn">
                         <button className="but" onClick={login} >SIGN IN</button>
+                        <br/>
+                        <input id="persist" type="checkbox" onChange={()=>setPersist(!persist)} checked={persist} />
+                        <label htmlFor="persist"> Remember Me</label>
                     </div>
                 </div>
             </form>

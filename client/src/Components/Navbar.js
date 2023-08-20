@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import useAuth from '../Hooks/useAuth';
 import { signout } from '../utils/icons';
 import { dashboard, expenses, transactions, trend } from '../utils/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import { styled } from 'styled-components';
+import useLogout from '../Hooks/useLogout';
+import useAuth from '../Hooks/useAuth';
 
 export default function Navbar() {
-    const { user,setUser } = useAuth();
-    const axiosPrivate = useAxiosPrivate();
+    const {user} = useAuth();
+    const logout = useLogout();
     const navigate= useNavigate();
     const [menu, setMenu] = useState([
         {
@@ -36,11 +36,9 @@ export default function Navbar() {
         // console.log(menu);
     };
 
-    const logOut = async ()=>{
+    const signOut = async ()=>{
         try{
-            const res=await axiosPrivate.get('auth/logout');
-            console.log(res);
-            setUser({});
+            await logout();
             navigate('/login');
         }catch(err){
             console.log(err);
@@ -68,8 +66,8 @@ export default function Navbar() {
                     </li>
                 })}
             </ul>
-            <div className='bottom-nav '>
-                <li onClick={logOut}>
+            <div className='bottom-nav'>
+                <li onClick={signOut}>
                     {signout} Sign Out
                 </li>
             </div>
@@ -148,5 +146,8 @@ const NavStyle=styled.div`
             background: #222260;
             border-radius: 0 10px 10px 0;
         }
+    }
+    .bottom-nav{
+        cursor:pointer;
     }
 `;

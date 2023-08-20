@@ -18,7 +18,7 @@ const userLogin = async (req,res)=>{
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn:'30s'
+                expiresIn:'1h'
             }
         );
         const refreshToken = jwt.sign(
@@ -36,7 +36,7 @@ const userLogin = async (req,res)=>{
     else{
         res.sendStatus(401);
     }
-}
+};
 
 const userRegister= async (req,res)=>{
     let {uname,pword}=req.body;
@@ -57,7 +57,7 @@ const userRegister= async (req,res)=>{
     catch(err){
         res.status(500).send({'message':err.message});
     }
-}
+};
 
 const userLogout= async (req,res)=>{
     const token=req.cookies?.jwt;
@@ -73,7 +73,7 @@ const userLogout= async (req,res)=>{
     await user.save();
     res.clearCookie('jwt',{httpOnly:true,sameSite:'None',secure:true,maxAge: 24 * 60 * 60 * 1000});
     return res.sendStatus(204);
-}
+};
 
 const handleRefreshToken=async (req,res)=>{
     // console.log(req.cookies);
@@ -92,11 +92,12 @@ const handleRefreshToken=async (req,res)=>{
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn:'30s'
+                expiresIn:'10s'
             }
         );
-        res.send({accessToken});
+        // console.log(user);
+        res.send({id:user._id,username:user.username,accessToken});
     })
-}
+};
 
 module.exports={userLogin,userLogout,userRegister,handleRefreshToken};

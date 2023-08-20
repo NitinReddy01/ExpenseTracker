@@ -1,6 +1,9 @@
+body{
+  background-image: url('../../utils/bg.png');
+}
 
 .box {
-    max-width: 500px;
+    max-width: 550px;
     height: 650px;
     border: 1px solid black;
     margin: auto;
@@ -10,7 +13,7 @@
     overflow: hidden;
   }
   .loginBox {
-    max-width: 500px;
+    max-width: 550px;
     height: 500px;
     border: 1px solid black;
     margin: auto;
@@ -18,21 +21,10 @@
     border-radius: 30px;
     box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
     overflow: hidden;
-  }
-  .homeBox{
-    max-width: 1200px;
-    height: 700px;
-    border: 1px solid black;
-    margin: auto;
-    margin-top: 20px;
-    border-radius: 30px;
-    box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
-    overflow: hidden;
-    text-align: center;
+    background-image: none;
   }
   .login {
-  
-    background-color: rgb(14, 170, 14);
+    background-color: rgb(231, 85, 85);
     height: 80px;
     width: 100%;
     color: white;
@@ -53,7 +45,7 @@
   .uname,.dropdown,.form-control{
     width: 400px;
     height: 50px;
-    outline-color: rgb(14, 170, 14);
+    outline-color: rgb(231, 85, 85);
     font-size: large;
     font-weight: bold;
     border: 1px solid black;
@@ -66,16 +58,29 @@
     margin-top: 20px;
   }
   
+  .pass-con{
+    position: relative;
+    display: inline-block;
+  }
+
   .pword {
     width: 400px;
     height: 50px;
-    outline-color: rgb(14, 170, 14);
+    outline-color: rgb(231, 85, 85);
     font-size: large;
     font-weight: bold;
     border: 1px solid black;
     border-radius: 10px;
   }
-  
+
+  .fa{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
   .loginbtn {
     text-align: center;
     margin-top: 20px;
@@ -84,17 +89,19 @@
   .but {
     width: 200px;
     height: 60px;
-    background-color: rgb(14, 170, 14);
+    background-color: rgb(231, 85, 85);
     color: white;
     font-family: 'Secular One', sans-serif;
     font-size: 20px;
     border: none;
     cursor: pointer;
     border-radius: 10px;
+    transition: all 0.3s;
   }
   
   .but:hover {
-    background-color: black;
+    background-color: rgb(244, 240, 240);
+    color: black;
   }
   
   .or1 {
@@ -105,7 +112,7 @@
   }
   
   .orsign {
-    color:green;
+    color:rgb(231, 85, 85);
     text-decoration: none;
     font-family: 'Secular One', sans-serif;
     font-size: 15px;
@@ -114,6 +121,11 @@
     font-size: small;
   }
   .success{
-    color: rgb(14, 170, 14);
+    color: rgb(231, 85, 85);
   }
-  
+  input{
+    background-color: rgb(252, 243, 243);
+  }
+  span{
+    font-weight:bold;
+  }

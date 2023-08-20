@@ -56,8 +56,8 @@ export default function Form({submitFunction,categories}) {
       <div className='input-con'>
         <select required value={input.category} name='category' onChange={handleChange}>
           <option value="" disabled >Select Option</option>
-          {categories.map((cat)=>{
-            return (<option value={cat}>{cat}</option>);
+          {categories.map((cat,ind)=>{
+            return (<option key={ind} value={cat}>{cat}</option>);
           })}
         </select>
       </div>

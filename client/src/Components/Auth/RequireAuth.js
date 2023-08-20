@@ -7,7 +7,7 @@ export default function RequireAuth() {
     const {user} = useAuth();
     const location = useLocation();
     return (
-            user?.id?
+            user?.accessToken?
             <TransactionProvider>
                 <Outlet/>
             </TransactionProvider>:<Navigate to='login' state={{from:location}} replace={true} />
