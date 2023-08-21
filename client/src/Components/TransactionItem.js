@@ -1,10 +1,11 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../utils/icons';
-import Button from './Button';
 import FormatDate from '../utils/FormatDate';
+import useTransactions from '../Hooks/useTransactions';
 
 export default function TransactionItem(props) {
+  const {setLoading} = useTransactions();
   const incomeIcon = () => {
     switch (props.category) {
       case 'salary':
@@ -17,7 +18,7 @@ export default function TransactionItem(props) {
         return bitcoin;
       case 'investments':
         return stocks;
-      case 'bank':
+      case 'bank transfer':
         return card;
       case 'youtube':
         return yt;
@@ -32,7 +33,7 @@ export default function TransactionItem(props) {
     switch (props.category) {
       case 'education':
         return book;
-      case 'groceries':
+      case 'food':
         return food;
       case 'health':
         return medical;
@@ -50,10 +51,14 @@ export default function TransactionItem(props) {
         return '';
     }
   }
+  const handleClick= async ()=>{
+    setLoading(true);
+    await props.deleteItem(props.id);
+  }
   return (
     <ItemStyle indicator={props.indicator}>
       <div className='icon'>
-        { props.type === 'expense'? expenseIcon(): incomeIcon() }
+        {props.type === 'expense' ? expenseIcon() : incomeIcon()}
       </div>
       <div className='content'>
         <h5>{props.title}</h5>
@@ -64,14 +69,7 @@ export default function TransactionItem(props) {
             <p>{comment} {props.description}</p>
           </div>
           <div className='btn-con'>
-            <Button
-              icon={trash}
-              pad={'1rem'}
-              rad={'50%'}
-              bg={'var(--primary-color'}
-              color={'#fff'}
-              onClick={()=>props.deleteItem(props.id)} 
-            />
+            <ButtonStyle style={{ background:'var(--primary-color', padding:'1rem', color:'#fff', borderRadius: '50%' }} onClick={handleClick} >{trash}</ButtonStyle>
           </div>
         </div>
       </div>
@@ -143,5 +141,17 @@ const ItemStyle = styled.div`
           }
       }
   }
+`;
+
+const ButtonStyle = styled.button`
+  outline: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  transition: all .4s ease-in-out;
 `;
 

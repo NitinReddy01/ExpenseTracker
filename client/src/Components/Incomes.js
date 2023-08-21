@@ -3,13 +3,17 @@ import { styled } from 'styled-components'
 import useTransactions from '../Hooks/useTransactions';
 import {InnerLayout} from '../Styles/Layout';
 import TransactionItem from './TransactionItem';
-import IncomeForm from './Form';
+import Form from './Form';
+import useAxiosPrivate from '../Hooks/useAxiosPrivate';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Incomes() {
-  const {incomes,totalIncome,deleteIncome,getIncomes,addIncome}=useTransactions();
-  const categories=["salary","investment","freelancing","bitcoin","bank transfer","youtube","other"];
+  const {incomes,totalIncome,deleteIncome,getIncomes,addIncome,loading}=useTransactions();
+  const categories=["salary","investments","freelancing","bitcoin","bank transfer","youtube","other"];
+  const axiosPrivate = useAxiosPrivate();
   useEffect(()=>{
-    getIncomes();
+    getIncomes(axiosPrivate);
   },[])
   return (
     <IncomeStyle>
@@ -18,10 +22,10 @@ export default function Incomes() {
         <h2 className='total'>Total Income: <span>${totalIncome()}</span></h2>
         <div className='content'>
           <div className='form'>
-            <IncomeForm submitFunction={addIncome} categories={categories} butName="Add Income" />
+            <Form submitFunction={addIncome} categories={categories} butName="Add Income" />
           </div>
           <div className='incomes'>
-            {incomes.map((income)=>{
+            { loading?<Skeleton count={3}/>: incomes.map((income)=>{
               // console.log(income);
               const {_id,title,amount,date,category,description,type} = income;
               return <TransactionItem

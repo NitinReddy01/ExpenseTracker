@@ -11,6 +11,7 @@ const PersistLogin=()=>{
     const {user,persist} = useAuth();
 
     useEffect(()=>{
+        let isMounted=true;
         const verifyRefreshToken = async ()=>{
             try{
                 await refresh();
@@ -19,10 +20,11 @@ const PersistLogin=()=>{
 
             }
             finally{
-                setLoading(false);
+                isMounted && setLoading(false);
             }
         }
         !user?.accessToken? verifyRefreshToken(): setLoading(false);
+        return ()=>isMounted=false;
     },[]);
     return (
         <>

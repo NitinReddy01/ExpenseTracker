@@ -10,12 +10,11 @@ import Chart from './Chart';
 export default function Dashboard() {
   const { totalExpenses, incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } =
     useTransactions();
-
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
-    getExpenses();
-    getIncomes();
+    getExpenses(axiosPrivate);
+    getIncomes(axiosPrivate);
   }, [])
 
   return (

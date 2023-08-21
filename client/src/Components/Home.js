@@ -7,6 +7,7 @@ import Incomes from './Incomes';
 import Expenses from './Expenses';
 import { MainLayout } from '../Styles/Layout';
 import { styled } from 'styled-components';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
 
   return (
     <>
+      <SkeletonTheme baseColor="#d1cfc9" highlightColor="#82817f">
         <HomeStyle>
           {Memo}
           <MainLayout>
@@ -38,6 +40,7 @@ export default function Home() {
             </main>
           </MainLayout>
         </HomeStyle>
+        </SkeletonTheme>
     </>
   )
 }

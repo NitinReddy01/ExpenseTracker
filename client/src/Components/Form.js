@@ -3,11 +3,10 @@ import { styled } from 'styled-components'
 import useTransactions from '../Hooks/useTransactions';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Button from './Button';
 import { plus } from '../utils/icons';
 
-export default function Form({submitFunction,categories,butName}) {
-  const { err, setErr } = useTransactions();
+export default function Form({ submitFunction, categories, butName }) {
+  const { err, setErr,setLoading } = useTransactions();
   const [input, setInput] = useState({
     title: '',
     amount: '',
@@ -18,6 +17,8 @@ export default function Form({submitFunction,categories,butName}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+    // console.log(input);
     submitFunction(input);
     setInput({
       title: '',
@@ -56,7 +57,7 @@ export default function Form({submitFunction,categories,butName}) {
       <div className='input-con'>
         <select required value={input.category} name='category' onChange={handleChange}>
           <option value="" disabled >Select Option</option>
-          {categories.map((cat,ind)=>{
+          {categories.map((cat, ind) => {
             return (<option key={ind} value={cat}>{cat}</option>);
           })}
         </select>
@@ -65,14 +66,7 @@ export default function Form({submitFunction,categories,butName}) {
         <textarea required name='description' value={input.description} onChange={handleChange} placeholder='Add any description' cols='30' rows='4'  ></textarea>
       </div>
       <div className="submit-btn">
-        <Button
-          name={butName}
-          icon={plus}
-          pad={'.8rem 1.6rem'}
-          rad={'30px'}
-          bg={'var(--color-accent'}
-          color={'#fff'}
-        />
+        <ButtonStyle style={{ background:'var(--color-accent' ,padding:'.8rem 1.6rem' , color: '#fff', borderRadius: '30px' }} > {plus} {butName} </ButtonStyle>
       </div>
     </IncomeFromStyle>
   )
@@ -122,3 +116,14 @@ const IncomeFromStyle = styled.form`
       }
   }
 `;
+const ButtonStyle = styled.button`
+  outline: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  transition: all .4s ease-in-out;
+`

@@ -9,22 +9,25 @@ export const TransactionProvider=(props) =>{
     const {user} = useAuth();
     const [incomes,setIncomes] = useState([]);
     const [expenses,setExpenses] = useState([]);
+    const [loading,setLoading] = useState(false);
     const [err,setErr] = useState();
 
     const addIncome = async (income)=>{
         try{
             await axiosPrivate.post('/transaction/add_income',{id:user?.id,data:income});
-            getIncomes();
+            await getIncomes(axiosPrivate);
         }
         catch (err){
             setErr(err.response.data.message);
         }
     }
 
-    const getIncomes = async ()=>{
+    const getIncomes = async (ap)=>{
         try{
-            const res= await axiosPrivate.get(`/transaction/get_incomes/${user?.id}`);
+            setLoading(true);
+            const res= await ap.get(`/transaction/get_incomes/${user?.id}`);
             setIncomes(res.data.incomes);
+            setLoading(false);
         }
         catch(err){
             setErr(err.response.data.message);
@@ -34,7 +37,7 @@ export const TransactionProvider=(props) =>{
     const deleteIncome = async (id)=>{
         try{
             await axiosPrivate.delete(`/transaction/delete_income/${id}`);
-            getIncomes();
+            await getIncomes(axiosPrivate);
         }catch (err){
             setErr(err.response.data.message);
         }
@@ -51,18 +54,20 @@ export const TransactionProvider=(props) =>{
     const addExpense = async (expense)=>{
         try{
             await axiosPrivate.post('/transaction/add_expense',{id:user?.id,data:expense});
-            getExpenses();
+            await getExpenses(axiosPrivate);
         }
         catch (err){
             setErr(err.response.data.message);
         }
     }
 
-    const getExpenses = async ()=>{
+    const getExpenses = async (ap)=>{
         try{
-            const res= await axiosPrivate.get(`/transaction/get_expenses/${user?.id}`);
+            setLoading(true);
+            const res= await ap.get(`/transaction/get_expenses/${user?.id}`);
             setExpenses(res.data.expenses);
             // console.log(res.data.expenses);
+            setLoading(false);
         }
         catch(err){
             setErr(err.response.data.message);
@@ -72,7 +77,7 @@ export const TransactionProvider=(props) =>{
     const deleteExpense = async (id)=>{
         try{
             await axiosPrivate.delete(`/transaction/delete_expense/${id}`);
-            getExpenses();
+            await getExpenses(axiosPrivate);
         }catch (err){
             setErr(err.response.data.message);
         }
@@ -102,7 +107,7 @@ export const TransactionProvider=(props) =>{
     return (
         <TransactionContext.Provider value={
             {addIncome,getIncomes,deleteIncome,totalIncome,addExpense,getExpenses,deleteExpense,totalExpenses,
-            totalBalance,transactionHistory,incomes,expenses,err,setErr}
+            totalBalance,transactionHistory,incomes,expenses,err,setErr,loading,setLoading}
             }>
             {props.children}
         </TransactionContext.Provider>

@@ -4,12 +4,16 @@ import { InnerLayout } from '../Styles/Layout';
 import TransactionItem from './TransactionItem';
 import { styled } from 'styled-components';
 import Form from './Form';
+import useAxiosPrivate from '../Hooks/useAxiosPrivate';
+import Skeleton from 'react-loading-skeleton';
 
 export default function Expenses() {
-  const {expenses,totalExpenses,deleteExpense,getExpenses,addExpense}=useTransactions();
+  const {expenses,totalExpenses,deleteExpense,getExpenses,addExpense,loading}=useTransactions();
+  const axiosPrivate = useAxiosPrivate();
   const categories=["education","food","health","subscriptions","takeaways","clothing","travelling","other"];
   useEffect(()=>{
-    getExpenses();
+    getExpenses(axiosPrivate);
+    // console.log("expe");
   },[])  
   return (
     <IncomeStyle>
@@ -21,7 +25,7 @@ export default function Expenses() {
             <Form submitFunction={addExpense} categories={categories} butName="Add Expense" />
           </div>
           <div className='incomes'>
-            {expenses.map((expense)=>{
+            {loading?<Skeleton count={3}/>: expenses.map((expense)=>{
               // console.log(expense);
               const {_id,title,amount,date,category,description,type} = expense;
               return <TransactionItem
