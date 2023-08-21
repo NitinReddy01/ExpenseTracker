@@ -14,7 +14,7 @@ const userLogin = async (req,res)=>{
     if(match){
         const accessToken=jwt.sign(
             {
-                username:uname
+                "username":uname
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
@@ -88,11 +88,11 @@ const handleRefreshToken=async (req,res)=>{
         if( err || user.username!== decoded.username) return res.sendStatus(403);
         const accessToken=jwt.sign(
             {
-                username:user.username
+                "username":user.username
             },
             process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn:'10s'
+                expiresIn:'1h'
             }
         );
         // console.log(user);

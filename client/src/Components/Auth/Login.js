@@ -29,7 +29,7 @@ export default function Login(props) {
             setPword('');
             setError(false);
             setErrorInfo('');
-            setUser({id:res.data.id,...user,accessToken:res.data.accessToken});
+            setUser({id:res.data.id,uname,accessToken:res.data.accessToken});
             navigate(from,{replace:true});
         }
         catch (err) {
