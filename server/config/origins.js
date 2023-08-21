@@ -1,6 +1,6 @@
 const origins=[
     'http://localhost:3000',
-    'https://64e38fb3bb88a6008d12aa16--mellow-cocada-fd5406.netlify.app'
+    'https://64e398dbbb88a6083012a8be--magical-bavarois-603e5b.netlify.app'
 ];
 
 module.exports=origins;

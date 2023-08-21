@@ -10,6 +10,6 @@ export default function RequireAuth() {
             user?.accessToken?
             <TransactionProvider>
                 <Outlet/>
-            </TransactionProvider>:<Navigate to='login' state={{from:location}} replace={true} />
+            </TransactionProvider>:<Navigate to='/login' state={{from:location}} replace={true} />
     );
 }
