@@ -1,8 +1,5 @@
-import React from 'react'
-import Moment from 'react-moment';
+import moment from 'moment';
 
-export default function FormatDate(props) {
-  return (
-    <Moment format='DD/MM/YYYY' >{props.date}</Moment>
-  )
+export default function FormatDate(date) {
+  return ( moment(date).format('DD/MM/YYYY')  )
 }

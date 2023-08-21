@@ -18,7 +18,7 @@ export default function Expenses() {
         <h2 className='total'>Total Expenses: <span>${totalExpenses()}</span></h2>
         <div className='content'>
           <div className='form'>
-            <Form submitFunction={addExpense} categories={categories} />
+            <Form submitFunction={addExpense} categories={categories} butName="Add Expense" />
           </div>
           <div className='incomes'>
             {expenses.map((expense)=>{

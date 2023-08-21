@@ -5,6 +5,7 @@ import { dollar } from '../utils/icons';
 import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import { InnerLayout } from '../Styles/Layout';
 import styled from 'styled-components';
+import Chart from './Chart';
 
 export default function Dashboard() {
   const { totalExpenses, incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } =
@@ -23,6 +24,7 @@ export default function Dashboard() {
         <h1>All Transactions</h1>
         <div className='stats'>
           <div className='chart'>
+            <Chart/>
             <div className='amount'>
               <div className='income'>
                 <h2>Total Income</h2>

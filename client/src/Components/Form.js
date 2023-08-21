@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Button from './Button';
 import { plus } from '../utils/icons';
 
-export default function Form({submitFunction,categories}) {
+export default function Form({submitFunction,categories,butName}) {
   const { err, setErr } = useTransactions();
   const [input, setInput] = useState({
     title: '',
@@ -66,7 +66,7 @@ export default function Form({submitFunction,categories}) {
       </div>
       <div className="submit-btn">
         <Button
-          name={'Add Income'}
+          name={butName}
           icon={plus}
           pad={'.8rem 1.6rem'}
           rad={'30px'}

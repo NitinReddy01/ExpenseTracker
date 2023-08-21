@@ -60,7 +60,7 @@ export default function TransactionItem(props) {
         <div className='inner-content'>
           <div className='text'>
             <p>{dollar}{props.amount}</p>
-            <p>{calender}<FormatDate date={props.date}/></p>
+            <p>{calender}{FormatDate(props.date)}</p>
             <p>{comment} {props.description}</p>
           </div>
           <div className='btn-con'>
