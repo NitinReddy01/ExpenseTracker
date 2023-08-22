@@ -52,8 +52,16 @@ export default function TransactionItem(props) {
     }
   }
   const handleClick= async ()=>{
-    setLoading(true);
-    await props.deleteItem(props.id);
+    try{
+      setLoading(true);
+      await props.deleteItem(props.id);
+      setLoading(false);
+    }
+    catch(error){
+      console.log(error);
+      setLoading(false);
+    }
+
   }
   return (
     <ItemStyle indicator={props.indicator}>
@@ -90,8 +98,8 @@ const ItemStyle = styled.div`
   width: 100%;
   color: #222260;
   .icon{
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 20px;
       background: #F5F5F5;
       display: flex;

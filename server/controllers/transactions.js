@@ -6,7 +6,7 @@ const addIncome=async (req,res)=>{
     const {id,data}=req.body;
     if(!id || !data) return res.status(400).send({"message":"missing data"});
     const {title,amount,category,description,date}=data;
-    if( !title || !amount || !category || !description || !date){
+    if( !title || !amount || !category || !date){
         return res.status(400).send({"message":"Please enter all the fields"});
     }
     if( isNaN(amount) || amount<0) {
@@ -57,7 +57,7 @@ const addExpense=async (req,res)=>{
     const {id,data}=req.body;
     if(!id || !data) return res.status(400).send({"message":"missing data"});
     const {title,amount,category,description,date}=data;
-    if( !title || !amount || !category || !description || !date){
+    if( !title || !amount || !category || !date){
         return res.status(400).send({"message":"Please enter all the fields"});
     }
     if( isNaN(amount) || amount<0) {

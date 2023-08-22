@@ -18,8 +18,8 @@ export default function Expenses() {
   return (
     <IncomeStyle>
       <InnerLayout>
-        <h1>Expenses</h1>
-        <h2 className='total'>Total Expenses: <span>${totalExpenses()}</span></h2>
+        <h2>Expenses</h2>
+        <h3 className='total'>Total Expenses: <span>${totalExpenses()}</span></h3>
         <div className='content'>
           <div className='form'>
             <Form submitFunction={addExpense} categories={categories} butName="Add Expense" />
@@ -64,7 +64,7 @@ const IncomeStyle=styled.div`
       gap: .5rem;
       span{
           font-size: 2.5rem;
-          font-weight: 800;
+          font-weight: 700;
           color: var(--color-green);
       }
   }

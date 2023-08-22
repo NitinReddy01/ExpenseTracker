@@ -15,18 +15,24 @@ export default function Form({ submitFunction, categories, butName }) {
     category: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    setLoading(true);
     // console.log(input);
-    submitFunction(input);
-    setInput({
-      title: '',
-      amount: '',
-      date: '',
-      description: '',
-      category: ''
-    });
+    try {
+      setLoading(true);
+      await submitFunction(input);
+      setInput({
+        title: '',
+        amount: '',
+        date: '',
+        description: '',
+        category: ''
+      });
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   }
 
   const handleChange = (e) => {
@@ -56,14 +62,14 @@ export default function Form({ submitFunction, categories, butName }) {
       </div>
       <div className='input-con'>
         <select required value={input.category} name='category' onChange={handleChange}>
-          <option value="" disabled >Select Option</option>
+          <option value="" disabled >Select Category</option>
           {categories.map((cat, ind) => {
             return (<option key={ind} value={cat}>{cat}</option>);
           })}
         </select>
       </div>
       <div className='input-con' >
-        <textarea required name='description' value={input.description} onChange={handleChange} placeholder='Add any description' cols='30' rows='4'  ></textarea>
+        <textarea  name='description' value={input.description} onChange={handleChange} placeholder='Add any description' cols='30' rows='4'  ></textarea>
       </div>
       <div className="submit-btn">
         <ButtonStyle style={{ background:'var(--color-accent' ,padding:'.8rem 1.6rem' , color: '#fff', borderRadius: '30px' }} > {plus} {butName} </ButtonStyle>
@@ -75,7 +81,7 @@ export default function Form({ submitFunction, categories, butName }) {
 const IncomeFromStyle = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   input, textarea, select{
       font-family: inherit;
       font-size: inherit;

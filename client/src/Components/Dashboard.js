@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Chart from './Chart';
 
 export default function Dashboard() {
-  const { totalExpenses, incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } =
+  const { totalExpenses, incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses,err } =
     useTransactions();
   const axiosPrivate = useAxiosPrivate();
 
@@ -20,25 +20,25 @@ export default function Dashboard() {
   return (
     <DashboardStyle>
       <InnerLayout>
-        <h1>All Transactions</h1>
+        <h2>All Transactions</h2>
         <div className='stats'>
           <div className='chart'>
             <Chart/>
             <div className='amount'>
               <div className='income'>
-                <h2>Total Income</h2>
+                <h3>Total Income</h3>
                 <p>
                   {dollar} {totalIncome()}
                 </p>
               </div>
               <div className='expense'>
-                <h2>Total Expense</h2>
+                <h3>Total Expense</h3>
                 <p>
                   {dollar} {totalExpenses()}
                 </p>
               </div>
               <div className='balance'>
-                <h2>Total Balance</h2>
+                <h3>Total Balance</h3>
                 <p>
                   {dollar} {totalBalance()}
                 </p>
@@ -50,19 +50,19 @@ export default function Dashboard() {
             <h2 className='salary-title'>Min <span>Salary</span> Max</h2>
             <div className='salary-item'>
               <p>
-                ${Math.min(...incomes.map(item => item.amount))}
+                ${incomes.length>0?Math.min(...incomes.map(item => item.amount)):0}
               </p>
               <p>
-                ${Math.max(...incomes.map(item => item.amount))}
+                ${incomes.length>0? Math.max(...incomes.map(item => item.amount)):0}
               </p>
             </div>
             <h2 className='salary-title'>Min <span>Expense</span> Max</h2>
             <div className='salary-item'>
               <p>
-                ${Math.min(...expenses.map(item => item.amount))}
+                ${expenses.length>0?Math.min(...expenses.map(item => item.amount)):0}
               </p>
               <p>
-                ${Math.max(...expenses.map(item => item.amount))}
+                ${expenses.length>0?Math.max(...expenses.map(item => item.amount)):0}
               </p>
             </div>
           </div>
@@ -80,13 +80,13 @@ const DashboardStyle = styled.div`
     }
     .chart{
       grid-column: 1/4;
-      height: 400px;
+      height: 300px;
     }
     .amount{
       display: grid;
       grid-template-columns: repeat(4,1fr);
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
     .income, .expense{
       grid-column: span 2;
@@ -97,9 +97,14 @@ const DashboardStyle = styled.div`
       box-shadow: 0px 1px 15px rgba(0,0,0,0.06);
       border-radius: 20px;
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
+
     .income, .expense, .balance p{
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-weight: 700;
     }
     .balance{
@@ -112,7 +117,7 @@ const DashboardStyle = styled.div`
     .balance p{
       color: var(--color-green);
       opacity: 0,6;
-      font-size: 4.5rem;
+      font-size: 2.5rem;
     }
     .history{
       grid-column: 4/-1;

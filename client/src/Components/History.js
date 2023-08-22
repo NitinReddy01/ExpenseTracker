@@ -8,7 +8,7 @@ export default function History() {
 
   return (
     <HistoryStyle>
-      <h2>Recent History</h2>
+      <h3>Recent History</h3>
       {history.map((item) => {
         const { _id, title, amount, type } = item;
         return (
@@ -45,5 +45,6 @@ const HistoryStyle=styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height:4rem;
   }
 `

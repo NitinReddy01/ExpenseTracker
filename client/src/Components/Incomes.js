@@ -18,8 +18,8 @@ export default function Incomes() {
   return (
     <IncomeStyle>
       <InnerLayout>
-        <h1>Incomes</h1>
-        <h2 className='total'>Total Income: <span>${totalIncome()}</span></h2>
+        <h2>Incomes</h2>
+        <h3 className='total'>Total Income: <span>${totalIncome()}</span></h3>
         <div className='content'>
           <div className='form'>
             <Form submitFunction={addIncome} categories={categories} butName="Add Income" />
@@ -64,7 +64,7 @@ const IncomeStyle=styled.div`
       gap: .5rem;
       span{
           font-size: 2.5rem;
-          font-weight: 800;
+          font-weight: 700;
           color: var(--color-green);
       }
   }

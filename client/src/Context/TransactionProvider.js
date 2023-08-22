@@ -18,19 +18,27 @@ export const TransactionProvider=(props) =>{
             await getIncomes(axiosPrivate);
         }
         catch (err){
-            setErr(err.response.data.message);
+            if(!err?.response){
+                setErr("No Response from the server")
+            }
+            else{
+                setErr(err.response.data.message);
+            }
         }
     }
 
     const getIncomes = async (ap)=>{
         try{
-            setLoading(true);
             const res= await ap.get(`/transaction/get_incomes/${user?.id}`);
             setIncomes(res.data.incomes);
-            setLoading(false);
         }
         catch(err){
-            setErr(err.response.data.message);
+            if(!err?.response){
+                setErr("No Response from the server")
+            }
+            else{
+                setErr(err.response.data.message);
+            }
         }
     }
 
@@ -39,7 +47,17 @@ export const TransactionProvider=(props) =>{
             await axiosPrivate.delete(`/transaction/delete_income/${id}`);
             await getIncomes(axiosPrivate);
         }catch (err){
-            setErr(err.response.data.message);
+            if(!err?.response){
+                setErr("No Response from the server")
+            }
+            else{
+                if(!err?.response){
+                    setErr("No Response from the server")
+                }
+                else{
+                    setErr(err.response.data.message);
+                }
+            }
         }
     }
 
@@ -57,20 +75,28 @@ export const TransactionProvider=(props) =>{
             await getExpenses(axiosPrivate);
         }
         catch (err){
-            setErr(err.response.data.message);
+            if(!err?.response){
+                setErr("No Response from the server")
+            }
+            else{
+                setErr(err.response.data.message);
+            }
         }
     }
 
     const getExpenses = async (ap)=>{
         try{
-            setLoading(true);
             const res= await ap.get(`/transaction/get_expenses/${user?.id}`);
             setExpenses(res.data.expenses);
             // console.log(res.data.expenses);
-            setLoading(false);
         }
         catch(err){
-            setErr(err.response.data.message);
+            if(!err?.response){
+                setErr("No Response from the server")
+            }
+            else{
+                setErr(err.response.data.message);
+            }
         }
     }
 
@@ -79,7 +105,12 @@ export const TransactionProvider=(props) =>{
             await axiosPrivate.delete(`/transaction/delete_expense/${id}`);
             await getExpenses(axiosPrivate);
         }catch (err){
-            setErr(err.response.data.message);
+            if(!err?.response){
+                setErr("No Response from the server")
+            }
+            else{
+                setErr(err.response.data.message);
+            }
         }
     }
 

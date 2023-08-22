@@ -122,12 +122,16 @@ const NavStyle=styled.div`
             cursor: pointer;
             transition: all .4s ease-in-out;
             color: rgba(34, 34, 96, .6);
+            text-decoration:none;
             padding-left: 1rem;
             position: relative;
             i{
                 color: rgba(34, 34, 96, 0.6);
                 font-size: 1.4rem;
                 transition: all .4s ease-in-out;
+            }
+            span{
+                font-size:1rem;
             }
         }
     }
