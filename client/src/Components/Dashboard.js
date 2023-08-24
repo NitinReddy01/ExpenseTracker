@@ -8,13 +8,20 @@ import styled from 'styled-components';
 import Chart from './Chart';
 
 export default function Dashboard() {
-  const { totalExpenses, incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses,err } =
+  const { totalExpenses, incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } =
     useTransactions();
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
-    getExpenses(axiosPrivate);
-    getIncomes(axiosPrivate);
+    const getTransactions = async ()=>{
+      try {
+        await getExpenses(axiosPrivate);
+        await getIncomes(axiosPrivate);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getTransactions();
   }, [])
 
   return (

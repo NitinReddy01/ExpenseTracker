@@ -9,11 +9,21 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Incomes() {
-  const {incomes,totalIncome,deleteIncome,getIncomes,addIncome,loading}=useTransactions();
+  const {incomes,totalIncome,deleteIncome,getIncomes,addIncome,loading,setLoading}=useTransactions();
   const categories=["salary","investments","freelancing","bitcoin","bank transfer","youtube","other"];
   const axiosPrivate = useAxiosPrivate();
   useEffect(()=>{
-    getIncomes(axiosPrivate);
+    const GetIcnomes = async () =>{
+      try {
+        setLoading(true);
+        await getIncomes(axiosPrivate);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+    GetIcnomes();
   },[])
   return (
     <IncomeStyle>

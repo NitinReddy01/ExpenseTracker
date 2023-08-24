@@ -8,12 +8,22 @@ import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import Skeleton from 'react-loading-skeleton';
 
 export default function Expenses() {
-  const {expenses,totalExpenses,deleteExpense,getExpenses,addExpense,loading}=useTransactions();
+  const {expenses,totalExpenses,deleteExpense,getExpenses,addExpense,loading,setLoading}=useTransactions();
   const axiosPrivate = useAxiosPrivate();
   const categories=["education","food","health","subscriptions","takeaways","clothing","travelling","other"];
   useEffect(()=>{
-    getExpenses(axiosPrivate);
-    // console.log("expe");
+    const GetExpenses = async ()=>{
+      try {
+        setLoading(true);
+        await getExpenses(axiosPrivate);
+        setLoading(false);
+        
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+    GetExpenses();
   },[])  
   return (
     <IncomeStyle>

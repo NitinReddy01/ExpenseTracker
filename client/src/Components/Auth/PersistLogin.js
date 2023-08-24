@@ -28,7 +28,6 @@ const PersistLogin=()=>{
     },[]);
     return (
         <>
-
         {!persist?<Outlet/>:loading?<p>Loading...</p>:<Outlet/>}
         </>
     )
