@@ -13,17 +13,23 @@ export default function Incomes() {
   const categories=["salary","investments","freelancing","bitcoin","bank transfer","youtube","other"];
   const axiosPrivate = useAxiosPrivate();
   useEffect(()=>{
+    let isMounted=true;
     const GetIcnomes = async () =>{
-      try {
-        setLoading(true);
-        await getIncomes(axiosPrivate);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
+      if(isMounted){
+        try {
+          setLoading(true);
+          await getIncomes(axiosPrivate);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
       }
     }
     GetIcnomes();
+    return ()=>{
+      isMounted=false;
+    }
   },[])
   return (
     <IncomeStyle>

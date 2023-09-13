@@ -76,9 +76,9 @@ export default function TransactionItem(props) {
             <p>{calender}{FormatDate(props.date)}</p>
             <p>{comment} {props.description}</p>
           </div>
-          <div className='btn-con'>
+          {props.deleteItem && <div className='btn-con'>
             <ButtonStyle style={{ background:'var(--primary-color', padding:'1rem', color:'#fff', borderRadius: '50%' }} onClick={handleClick} >{trash}</ButtonStyle>
-          </div>
+          </div>}
         </div>
       </div>
     </ItemStyle>
@@ -96,6 +96,7 @@ const ItemStyle = styled.div`
   align-items: center;
   gap: 1rem;
   width: 100%;
+  height:30%;
   color: #222260;
   .icon{
       width: 70px;

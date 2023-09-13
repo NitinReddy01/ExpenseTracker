@@ -12,18 +12,24 @@ export default function Expenses() {
   const axiosPrivate = useAxiosPrivate();
   const categories=["education","food","health","subscriptions","takeaways","clothing","travelling","other"];
   useEffect(()=>{
+    let isMounted=true;
     const GetExpenses = async ()=>{
-      try {
-        setLoading(true);
-        await getExpenses(axiosPrivate);
-        setLoading(false);
-        
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
+      if(isMounted){
+        try {
+          setLoading(true);
+          await getExpenses(axiosPrivate);
+          setLoading(false);
+          
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
       }
     }
     GetExpenses();
+    return ()=>{
+      isMounted=false;
+    }
   },[])  
   return (
     <IncomeStyle>
@@ -47,7 +53,7 @@ export default function Expenses() {
                        date={date}
                        category={category}
                        type={type}
-                       indicator="var(--color-green)"
+                       indicator="red"
                        deleteItem={deleteExpense} 
                         />
             })}

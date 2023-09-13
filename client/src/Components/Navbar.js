@@ -15,7 +15,7 @@ export default function Navbar() {
             id: 1, title: 'Dashboard', icon: dashboard, link: '/', active: false
         },
         {
-            id: 2, title: "View Transactions", icon: transactions, link: "/", active: false
+            id: 2, title: "View Transactions", icon: transactions, link: "/transactions", active: false
         },
         {
             id: 3, title: "Incomes", icon: trend, link: "/incomes", active: false
@@ -53,19 +53,21 @@ export default function Navbar() {
                     <p>Your Money</p>
                 </div>
             </div>
-            <ul className='items'>
-                {menu.map((item) => {
-                    return <li
-                        key={item.id}
-                        className={item.active ? 'acitve' : ''}
-                        onClick={() => handleClick(item.id)} >
-                         <Link to={item.link} className='links' >
-                            {item.icon}
-                            <span>{item.title}</span>
-                         </Link>
-                    </li>
-                })}
-            </ul>
+            <div className='items'>
+                <ul>
+                    {menu.map((item) => {
+                        return <li
+                            key={item.id}
+                            className={item.active ? 'acitve' : ''}
+                            onClick={() => handleClick(item.id)} >
+                            <Link to={item.link} className='links' >
+                                {item.icon}
+                                <span>{item.title}</span>
+                            </Link>
+                        </li>
+                    })}
+                </ul>
+            </div>
             <div className='bottom-nav'>
                 <li onClick={signOut}>
                     {signout} Sign Out
@@ -77,7 +79,7 @@ export default function Navbar() {
 
 const NavStyle=styled.div`
     padding: 2rem 1.5rem;
-    width: 374px;
+    width: 25%;
     height: 100%;
     background: rgba(252, 246, 249, 0.78);
     border: 3px solid #FFFFFF;
@@ -113,25 +115,23 @@ const NavStyle=styled.div`
         flex: 1;
         display: flex;
         flex-direction: column;
-        li,.links{
-            display: grid;
-            grid-template-columns: 40px auto;
+        li{
             align-items: center;
-            margin: .6rem 0;
-            font-weight: 500;
+            margin: 1rem 0;
             cursor: pointer;
             transition: all .4s ease-in-out;
             color: rgba(34, 34, 96, .6);
-            text-decoration:none;
             padding-left: 1rem;
             position: relative;
-            i{
-                color: rgba(34, 34, 96, 0.6);
-                font-size: 1.4rem;
-                transition: all .4s ease-in-out;
-            }
             span{
-                font-size:1rem;
+                font-size:1.2rem;
+                padding-left:1rem;
+            }
+            .links{
+                text-decoration:none;
+                color: rgba(34, 34, 96, .6);
+                font-weight: 400;
+                font-size:1.2rem;
             }
         }
     }

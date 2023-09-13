@@ -8,6 +8,7 @@ import AppLayout from './Components/AppLayout';
 import Dashboard from './Components/Dashboard';
 import Incomes from './Components/Incomes';
 import Expenses from './Components/Expenses';
+import Transactions from './Components/Transactions';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route element={<PersistLogin />} >
           <Route element={<RequireAuth />}>
             <Route path='/' element={<AppLayout> <Dashboard/> </AppLayout>} />
+            <Route path='/transactions' element={<AppLayout> <Transactions/> </AppLayout>} />
             <Route path='/incomes' element={<AppLayout> <Incomes/> </AppLayout>} />
             <Route path='/expenses' element={<AppLayout> <Expenses/> </AppLayout>} />
           </Route>

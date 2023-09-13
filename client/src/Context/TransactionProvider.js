@@ -51,12 +51,7 @@ export const TransactionProvider=(props) =>{
                 setErr("No Response from the server")
             }
             else{
-                if(!err?.response){
-                    setErr("No Response from the server")
-                }
-                else{
-                    setErr(err.response.data.message);
-                }
+                setErr(err.response.data.message);
             }
         }
     }

@@ -13,15 +13,21 @@ export default function Dashboard() {
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
+    let isMounted=true;
     const getTransactions = async ()=>{
-      try {
-        await getExpenses(axiosPrivate);
-        await getIncomes(axiosPrivate);
-      } catch (error) {
-        console.log(error);
+      if(isMounted){
+        try {
+          await getExpenses(axiosPrivate);
+          await getIncomes(axiosPrivate);
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
     getTransactions();
+    return ()=>{
+      isMounted=false;
+    }
   }, [])
 
   return (
@@ -111,7 +117,7 @@ const DashboardStyle = styled.div`
     }
 
     .income, .expense, .balance p{
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       font-weight: 700;
     }
     .balance{
@@ -124,7 +130,7 @@ const DashboardStyle = styled.div`
     .balance p{
       color: var(--color-green);
       opacity: 0,6;
-      font-size: 2.5rem;
+      font-size: 1.5rem;
     }
     .history{
       grid-column: 4/-1;
