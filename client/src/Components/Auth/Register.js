@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from '../../Api/axios';
 import { Link, useNavigate } from "react-router-dom";
 import './style.css';
-import toast, { ToastBar, Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Register(props) {
     const [uname, setUname] = useState("");
@@ -103,7 +103,12 @@ export default function Register(props) {
                 <Toaster
                     position="top-center"
                     toastOptions={{
-                        duration: 2500
+                        error:{
+                            duration:2500
+                        },
+                        success:{
+                            duration:2500
+                        }
                     }}
                 />
             </div>

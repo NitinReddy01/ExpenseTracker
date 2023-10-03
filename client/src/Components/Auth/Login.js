@@ -20,14 +20,15 @@ export default function Login(props) {
             uname: uname,
             pword: pword
         }
-        toast.promise(axios.post('/auth/login', user), {
-            loading: "Processing...",
-            success: (response) => {
-                setUser({id:response.data.id,uname,accessToken: response.data.accessToken});
-                navigate(from,{replace:true});
-                return "";
-            },
-            error: (err) => {
+        toast.promise(axios.post('/auth/login', user),
+            {
+                loading: "Processing...",
+                success: (response) => {
+                    setUser({ id: response.data.id, uname, accessToken: response.data.accessToken });
+                    navigate(from, { replace: true });
+                    return "";
+                },
+                error: (err) => {
                     if (!err?.response) {
                         return 'No response from the server';
                     }
@@ -40,30 +41,31 @@ export default function Login(props) {
                     else {
                         return 'login Failed';
                     }
+                },
             }
-        })
-    //     try {
-    //         const res = await axios.post('/auth/login', user);
-    //         // console.log(res.data);
-    //         setUname('');
-    //         setPword('');
-    //         setUser({ id: res.data.id, uname, accessToken: res.data.accessToken });
-    //         navigate(from, { replace: true });
-    //     }
-    //     catch (err) {
-    //         if (!err?.response) {
-    //             toast.error('No response from the server');
-    //         }
-    //         else if (err.response?.status === 400) {
-    //             toast.error("Missing username or password");
-    //         }
-    //         else if (err.response?.status === 401) {
-    //             toast.error('Check your username or password');
-    //         }
-    //         else {
-    //             toast.error('login Failed');
-    //         }
-    //     }
+        )
+        //     try {
+        //         const res = await axios.post('/auth/login', user);
+        //         // console.log(res.data);
+        //         setUname('');
+        //         setPword('');
+        //         setUser({ id: res.data.id, uname, accessToken: res.data.accessToken });
+        //         navigate(from, { replace: true });
+        //     }
+        //     catch (err) {
+        //         if (!err?.response) {
+        //             toast.error('No response from the server');
+        //         }
+        //         else if (err.response?.status === 400) {
+        //             toast.error("Missing username or password");
+        //         }
+        //         else if (err.response?.status === 401) {
+        //             toast.error('Check your username or password');
+        //         }
+        //         else {
+        //             toast.error('login Failed');
+        //         }
+        //     }
     };
 
     useEffect(() => {
@@ -76,7 +78,12 @@ export default function Login(props) {
                 <Toaster
                     position="top-center"
                     toastOptions={{
-                        duration: 2500
+                        error:{
+                            duration:2500
+                        },
+                        success:{
+                            duration:2500
+                        }
                     }}
                 />
             </div>
