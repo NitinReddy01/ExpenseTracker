@@ -3,11 +3,13 @@ const mongoose=require('mongoose');
 const userSchema=mongoose.Schema({
     username:{
         required:true,
-        type:String
+        type:String,
+        trim:true
     },
     password:{
         type:String,
-        required:true
+        required:true,
+        trim:true
     },
     refreshToken:String
 },{timestamps:true});
